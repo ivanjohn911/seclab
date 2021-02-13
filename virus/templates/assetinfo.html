@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}AssetInfo{% endblock %}
+{% block content %}
+<!--展示信息-->
+<h1>物资请购记录</h1>
+<table>
+    <tr>
+        <td>是否完成</td>
+        <td>需求来源</td>
+        <td>单据号</td>
+        <td>采购订单号</td>
+        <td>请购日期</td>
+        <td>请购物资/固定资产</td>
+        <td>请购部门</td>
+        <td>请购人</td>
+        <td>请购数量</td>
+        <td>请购用途</td>
+        <td>采购订单生成时间</td>
+        <td>采购员</td>
+        <td>超长原因说明</td>
+        <td>供应商</td>
+        <td>预计到货时间（采购回复）</td>
+        <td>预计到货时间（供应商回复）</td>
+        <td>实际到货时间（一）</td>
+        <td>实际到货数量（一）</td>
+        <td>实际到货时间（二）</td>
+        <td>实际到货数量（二）</td>
+        <td>实际到货时间（三）</td>
+        <td>实际到货数量（三）</td>
+        <td>未到数量</td>
+        <td>是否超期</td>
+        <td>超期时间</td>
+        <td>备注</td>
+    </tr>
+    {% for assetinfo in assetinfo.all %}
+    <tr>
+        <td>{{ assetinfo.Finish }}</td>
+        <td>{{ assetinfo.Source }}</td>
+        <td>{{ assetinfo.Document_No }}</td>
+        <td>{{ assetinfo.Order_No }}</td>
+        <td>{{ assetinfo.Requisition_date }}</td>
+        <td>{{ assetinfo.Materials }}</td>
+        <td>{{ assetinfo.Department }}</td>
+        <td>{{ assetinfo.Requisitioner }}</td>
+        <td>{{ assetinfo.Requisition_Num }}</td>
+        <td>{{ assetinfo.Requisition_purpose }}</td>
+        <td>{{ assetinfo.Order_Time }}</td>
+        <td>{{ assetinfo.Purchaser }}</td>
+        <td>{{ assetinfo.Reason }}</td>
+        <td>{{ assetinfo.Supplier }}</td>
+        <td>{{ assetinfo.Arrival_time1 }}</td>
+        <td>{{ assetinfo.Arrival_time2 }}</td>
+        <td>{{ assetinfo.Actual_time1 }}</td>
+        <td>{{ assetinfo.Actual_Num1 }}</td>
+        <td>{{ assetinfo.Actual_time2 }}</td>
+        <td>{{ assetinfo.Actual_Num2 }}</td>
+        <td>{{ assetinfo.Actual_time3 }}</td>
+        <td>{{ assetinfo.Actual_Num3 }}</td>
+        <td>{{ assetinfo.Unarrival_Num }}</td>
+        <td>{{ assetinfo.Overdue }}</td>
+        <td>{{ assetinfo.Overdue_time }}</td>
+        <td>{{ assetinfo.Remarks }}</td>
+        <td><a href="{% url 'delassetinfo' assetinfo.id %}">删除</a></td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

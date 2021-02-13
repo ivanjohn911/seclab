@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Search{% endblock %}
+{% block content %}
+<!--查詢信息-->
+
+<form action="/searchinfo/" method="post" name="searchinfo">
+  {% csrf_token %}
+  <p><span>IP地址：</span><input type="text" name="pcip" class="form-control form-control-navbar">
+    <button type="submit">查詢</button>
+</form>
+<div>
+  <table>
+    <tr>
+      <td>IP地址</td>
+      <td>姓名</td>
+      <td>处理情况</td>
+      <td>MAC</td>
+      <td>处理时间</td>
+    </tr>
+    {% for searchinfo in searchinfo %}
+    <tr>
+      <td>{{ searchinfo.pcip }}</td>
+      <td>{{ searchinfo.username }}</td>
+      <td>{{ searchinfo.status }}</td>
+      <td>{{ searchinfo.pcmac }}</td>
+      <td>{{ searchinfo.handle_time }}</td>
+      {% endfor %}
+  </table>
+</div>
+
+{% endblock %}

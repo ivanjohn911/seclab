@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}Searchasset{% endblock %}
+{% block content %}
+<!--查詢信息-->
+<form action="/searchassetinfo/" method="post" name="searchassetinfo">
+    {% csrf_token %}
+    <p><span>请购人：</span><input type="text" name="Requisitioner">
+        <button type="submit">查询</button>
+</form>
+<div>
+    <table>
+        <tr>
+            <td>是否完成</td>
+            <td>需求来源</td>
+            <td>单据号</td>
+            <td>采购订单号</td>
+            <td>请购日期</td>
+            <td>请购物资/固定资产</td>
+            <td>请购部门</td>
+            <td>请购人</td>
+            <td>请购数量</td>
+            <td>请购用途</td>
+            <td>采购订单生成时间</td>
+            <td>采购员</td>
+            <td>超长原因说明</td>
+            <td>供应商</td>
+            <td>预计到货时间（采购回复）</td>
+            <td>预计到货时间（供应商回复）</td>
+            <td>实际到货时间（一）</td>
+            <td>实际到货数量（一）</td>
+            <td>实际到货时间（二）</td>
+            <td>实际到货数量（二）</td>
+            <td>实际到货时间（三）</td>
+            <td>实际到货数量（三）</td>
+            <td>未到数量</td>
+            <td>是否超期</td>
+            <td>超期时间</td>
+            <td>备注</td>
+        </tr>
+        {% for searchassetinfo in searchassetinfo %}
+        <tr>
+            <td>{{ searchassetinfo.Finish }}</td>
+            <td>{{ searchassetinfo.Source }}</td>
+            <td>{{ searchassetinfo.Document_No }}</td>
+            <td>{{ searchassetinfo.Order_No }}</td>
+            <td>{{ searchassetinfo.Requisition_date }}</td>
+            <td>{{ searchassetinfo.Materials }}</td>
+            <td>{{ searchassetinfo.Department }}</td>
+            <td>{{ searchassetinfo.Requisitioner }}</td>
+            <td>{{ searchassetinfo.Requisition_Num }}</td>
+            <td>{{ searchassetinfo.Requisition_purpose }}</td>
+            <td>{{ searchassetinfo.Order_Time }}</td>
+            <td>{{ searchassetinfo.Purchaser }}</td>
+            <td>{{ searchassetinfo.Reason }}</td>
+            <td>{{ searchassetinfo.Supplier }}</td>
+            <td>{{ searchassetinfo.Arrival_time1 }}</td>
+            <td>{{ searchassetinfo.Arrival_time2 }}</td>
+            <td>{{ searchassetinfo.Actual_time1 }}</td>
+            <td>{{ searchassetinfo.Actual_Num1 }}</td>
+            <td>{{ searchassetinfo.Actual_time2 }}</td>
+            <td>{{ searchassetinfo.Actual_Num2 }}</td>
+            <td>{{ searchassetinfo.Actual_time3 }}</td>
+            <td>{{ searchassetinfo.Actual_Num3 }}</td>
+            <td>{{ searchassetinfo.Unarrival_Num }}</td>
+            <td>{{ searchassetinfo.Overdue }}</td>
+            <td>{{ searchassetinfo.Overdue_time }}</td>
+            <td>{{ searchassetinfo.Remarks }}</td>
+            {% endfor %}
+    </table>
+</div>
+
+{% endblock %}

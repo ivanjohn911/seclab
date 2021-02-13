@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Info{% endblock %}
+{% block content %}
+<!--查詢信息-->
+<h1>笔记本病毒处理记录</h1>
+<table>
+    <tr>
+        <td>IP地址</td>
+        <td>姓名</td>
+        <td>处理情况</td>
+        <td>MAC</td>
+        <td>处理时间</td>
+    </tr>
+    {% for info in info.all %}
+    <tr>
+        <td>{{ info.pcip }}</td>
+        <td>{{ info.username }}</td>
+        <td>{{ info.status }}</td>
+        <td>{{ info.pcmac }}</td>
+        <td>{{ info.handle_time }}</td>
+        <td><a href="{% url 'delinfo' info.id %}">删除</a></td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+<form action="/addinfo/" method="post" name="addinfo">
+    {% csrf_token %}
+    <p><span>IP地址：</span><input type="text" name="pcip"></p>
+    <p><span>姓名： </span><input type="text" name="username"></p>
+    <p><span>编号： </span><input type="text" name="number"></p>
+    <p><span>计算机名： </span><input type="text" name="pcname"></p>
+    <p><span>处理情况：</span>
+        <select type="text" name="status">
+            <option value="已处理">已处理</option>
+            <option value="未处理">未处理</option>
+        </select>
+    </p>
+    <p><span>处理时间：</span><input type="text" name="handle_time"></p>
+    <p><span>备注：</span><input type="text" name="remarks"></p>
+    <p><span>病毒种类：</span><input type="text" name="virus_type"></p>
+    <p><span>MAC：</span><input type="text" name="pcmac"></p>
+    <input type="submit" value="添加">
+</form>
+
+{% endblock %}

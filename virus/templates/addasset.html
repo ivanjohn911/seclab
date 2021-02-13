@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Addasset{% endblock %}
+{% block content %}
+
+<form action="/addasset/" method="post" name="addasset">
+    {% csrf_token %}
+    <p><span>是否完成：</span>
+        <select type="text" name="Finish">
+            <option value="已完成">已完成</option>
+            <option value="未完成">未完成</option>
+        </select>
+    </p>
+    <p><span>需求来源： </span><input type="text" name="Source"></p>
+    <p><span>单据号： </span><input type="text" name="Document_No"></p>
+    <p><span>采购订单号： </span><input type="text" name="Order_No"></p>
+    <p><span>请购日期：</span><input type="text" name="Requisition_date"></p>
+    <p><span>请购物资/固定资产：</span><input type="text" name="Materials"></p>
+    <p><span>请购部门：</span><input type="text" name="Department"></p>
+    <p><span>请购人：</span><input type="text" name="Requisitioner"></p>
+    <p><span>请购数量：</span><input type="text" name="Requisition_Num"></p>
+    <p><span>请购用途：</span><input type="text" name="Requisition_purpose"></p>
+    <p><span>采购订单生成时间：</span><input type="text" name="Order_Time"></p>
+    <p><span>采购员：</span><input type="text" name="Purchaser"></p>
+    <p><span>超长原因说明：</span><input type="text" name="Reason"></p>
+    <p><span>供应商：</span><input type="text" name="Supplier"></p>
+    <p><span>预计到货时间（采购回复）：</span><input type="text" name="Arrival_time1"></p>
+    <p><span>预计到货时间（供应商回复）：</span><input type="text" name="Arrival_time2"></p>
+    <p><span>实际到货时间（一）：</span><input type="text" name="Actual_time1"></p>
+    <p><span>实际到货数量（一）：</span><input type="text" name="Actual_Num1"></p>
+    <p><span>实际到货时间（二）：</span><input type="text" name="Actual_time2"></p>
+    <p><span>实际到货数量（二）：</span><input type="text" name="Actual_Num2"></p>
+    <p><span>实际到货时间（三）：</span><input type="text" name="Actual_time3"></p>
+    <p><span>实际到货数量（三）：</span><input type="text" name="Actual_Num3"></p>
+    <p><span>未到数量：</span><input type="text" name="Unarrival_Num"></p>
+    <p><span>是否超期：</span>
+        <select type="text" name="Overdue">
+            <option value="已超期">已超期</option>
+            <option value="未超期">未超期</option>
+        </select>
+    </p>
+    <p><span>超期时间：</span><input type="text" name="Overdue_time"></p>
+    <p><span>备注：</span><input type="text" name="Remarks"></p>
+    <input type="submit" value="添加">
+</form>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Sendmail{% endblock %}
+{% block content %}
+<!--发送邮件-->
+
+<div>
+    <form action="/sendmail/" method="POST" name="sendmail">
+        {% csrf_token %}
+        <p><span>邮箱地址：</span><input type="text" class="form-control" name="mailaddress"></p>
+        <button type="submit">发送邮件</button>
+    </form>
+</div>
+{% endblock %}

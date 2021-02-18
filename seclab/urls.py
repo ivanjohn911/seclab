@@ -39,5 +39,8 @@ urlpatterns = [
     #start页面相关
     path('', RedirectView.as_view(url='start/')),
     path('start/', views.IndexView.as_view(), name='start'),
-    url(r'^start/', include("virus.urls"))
+    url(r'^start/', include("virus.urls")),
+    #login页面相关
+    path('login/',views.login,name='login'),
+    path('userlogin/',views.userlogin,name='userlogin'),
 ]

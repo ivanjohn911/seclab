@@ -146,3 +146,31 @@ class asset(models.Model):
 
 def __str__(self):
     return self.name
+
+
+class user(models.Model):
+    '''用户表'''
+
+    gender = (
+        ('male','男'),
+        ('female','女'),
+    )
+
+    #姓名
+    name = models.CharField(max_length=128,unique=True)
+    #用户名
+    username = models.CharField(max_length=32,unique=True,default="")
+    #密码
+    password = models.CharField(max_length=256)
+    #性别
+    sex = models.CharField(max_length=32,choices=gender,default='男')
+    #创建时间
+    c_time = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        ordering = ['c_time']
+        verbose_name = '用户表'
+        verbose_name_plural = verbose_name

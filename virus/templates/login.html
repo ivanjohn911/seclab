@@ -30,7 +30,7 @@
       <form action="/userlogin/" method="POST" name='userlogin'>
         {% csrf_token %}
         <div class="input-group mb-3">
-          <input type="username" class="form-control" placeholder="用户名">
+          <input type="username" class="form-control" placeholder="用户名" name="username">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -38,7 +38,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="密码">
+          <input type="password" class="form-control" placeholder="密码" name="password">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>

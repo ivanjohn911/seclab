@@ -1,12 +1,12 @@
-from django.shortcuts import render,redirect
-from .models import virus_record, mail_info, asset ,user
+from django.shortcuts import render, redirect
+from .models import virus_record, mail_info, asset, user
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.utils import timezone
 from django.core.mail import send_mail, EmailMultiAlternatives
 from django.contrib import messages
 from django.views.generic import TemplateView
-from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
 
@@ -38,8 +38,9 @@ def searchinfo(request):
 
 def searchassetinfo(request):
     if request.method == 'POST':
-        temp_Requisitioner= request.POST['Requisitioner']
-        search_assetinfo = asset.objects.filter(Requisitioner=temp_Requisitioner)
+        temp_Requisitioner = request.POST['Requisitioner']
+        search_assetinfo = asset.objects.filter(
+            Requisitioner=temp_Requisitioner)
         return render(request, 'searchasset.html', {'searchassetinfo': search_assetinfo})
 
 # 新增数据
@@ -143,14 +144,11 @@ def showstart(request):
     return render(request, 'start.html')
 
 
-
-
 class IndexView(TemplateView):
     template_name = 'start.html'
 
     def get(self, request, *args, **kwargs):
         return super(IndexView, self).get(request, *args, **kwargs)
-
 
 
 # 新增资产请购数据
@@ -218,30 +216,48 @@ def addasset(request):
     # 重定向
     return HttpResponseRedirect(reverse('showaddasset'))
 
+    # 用户管理
+    # 展示login页面
 
-    #用户管理
-    #展示login页面
+
 def login(request):
     return render(request, 'login.html')
 
-    #用户登录
-def userlogin(request):
-    if request.method == "POST":
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        if username.strip() and password:  # 确保用户名和密码都不为空
-            # 用户名字符合法性验证
-            # 密码长度验证
-            # 更多的其它验证.....
-            try:
-                user = models.user.objects.get(name=username)
-            except:
-                return render(request, 'login.html')
-            if user.password == password:
-                return redirect('start.html')
-    return render(request, 'login.html')
+    # 用户登录
 
+
+def userlogin(request):
+    user = request.POST['username']
+    password = request.POST['password']
+    result = user.objects.get(username=user,password=password)
+
+    if not result:
+        return HttpResponseRedirect('/register/')
+    else :
+       request.session['user'] = user
+       return HttpResponseRedirect('/login/')
 
 def userlogout(request):
     logout(request)
-    return redirect(reverse('login'))
+    return redirect(reverse('login.html'))
+
+'''
+
+
+ 
+
+           if request.method == 'GET':
+        return render(request,'login.html')
+    else:
+        username = request.POST.get('username',None)
+        password = request.POST.get('password',None)
+        #  如果这个地方使用authenticate方法验证  在注册逻辑中 必须使用set_password方法
+        a = authenticate(username=username,password=password)
+        if a:
+            login(request,a)
+            return redirect(reverse('index'))
+        else:
+            return render(request, 'login.html', {
+                'msg': '用户名或密码错误'
+            })
+    '''
